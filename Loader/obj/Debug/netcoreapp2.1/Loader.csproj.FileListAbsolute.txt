@@ -1,0 +1,12 @@
+D:\7 semestr\Metaheurystyki\Implementation\Loader\Loader\bin\Debug\netcoreapp2.1\Loader.deps.json
+D:\7 semestr\Metaheurystyki\Implementation\Loader\Loader\bin\Debug\netcoreapp2.1\Loader.dll
+D:\7 semestr\Metaheurystyki\Implementation\Loader\Loader\bin\Debug\netcoreapp2.1\Loader.pdb
+D:\7 semestr\Metaheurystyki\Implementation\Loader\Loader\obj\Debug\netcoreapp2.1\Loader.csprojAssemblyReference.cache
+D:\7 semestr\Metaheurystyki\Implementation\Loader\Loader\obj\Debug\netcoreapp2.1\Loader.csproj.CoreCompileInputs.cache
+D:\7 semestr\Metaheurystyki\Implementation\Loader\Loader\obj\Debug\netcoreapp2.1\Loader.AssemblyInfoInputs.cache
+D:\7 semestr\Metaheurystyki\Implementation\Loader\Loader\obj\Debug\netcoreapp2.1\Loader.AssemblyInfo.cs
+D:\7 semestr\Metaheurystyki\Implementation\Loader\Loader\obj\Debug\netcoreapp2.1\Loader.dll
+D:\7 semestr\Metaheurystyki\Implementation\Loader\Loader\obj\Debug\netcoreapp2.1\Loader.pdb
+D:\7 semestr\Metaheurystyki\Implementation\Loader\Loader\bin\Debug\netcoreapp2.1\DataModel.dll
+D:\7 semestr\Metaheurystyki\Implementation\Loader\Loader\bin\Debug\netcoreapp2.1\DataModel.pdb
+D:\7 semestr\Metaheurystyki\Implementation\Loader\Loader\obj\Debug\netcoreapp2.1\Loader.csproj.CopyComplete
