@@ -11,88 +11,109 @@ namespace Loader
     {
         #region Private parameters
 
+        #region Consts
+
+        private const int CapacityOfKnapsackIndex = 4;
+
+        private const int DimensionIndex = 2;
+
+        private const int MaxSpeedIndex = 6;
+
+        private const int MinSpeedIndex = 5;
+
+        private const int NumberOfItemsIndex = 3;
+
+        private const string PathToFolderWithData = @"D:\7 semestr\Metaheurystyki\Data\ttp_student";
+
+        private const string PathToTestData = @"D:\7 semestr\Metaheurystyki\Data\ttp_student\trivial_0.ttp";
+
+        private const int PlacesStartIndex = 10;
+
+        private const int RentingRatioIndex = 7;
+
         /// <summary>
         /// ValueIndex = 1; means that at in string[] numerical value is at ValueIndex position
         /// </summary>
         private const int ValueIndex = 1;
 
-        private const int PlacesStartIndex = 10;
+        #endregion Consts
+
         public int ItemsStartIndex => PlacesStartIndex + NumberOfPlaces + 1;
         public int NumberOfPlaces { get; set; }
 
-        private const int DimensionIndex = 2;
-        private const int NumberOfItemsIndex = 3;
-        private const int CapacityOfKnapsackIndex = 4;
-        private const int MinSpeedIndex = 5;
-        private const int MaxSpeedIndex = 6;
-        private const int RentingRatioIndex = 7;
-
         #region Item
 
-        private const int ItemIdIndex = 0;
-        private const int PozitionXIndex = 1;
-        private const int PozitionYIndex = 2;
         public const int ItemPlaceIdIndex = 3;
+        private const int ItemIdIndex = 0;
+        private const int PositionXIndex = 1;
+        private const int PositionYIndex = 2;
 
         #endregion Item
 
         #region Place
 
-        public const int PlaceIdIndex = 0;
-        public const int WeightIndex = 1;
-        public const int ProfitXIndex = 2;
         public const int ItemIdIndexForPlace = 3;
+        public const int PlaceIdIndex = 0;
+        public const int ProfitXIndex = 2;
+        public const int WeightIndex = 1;
 
         #endregion Place
 
-        private const string PathToFolderWithData = @"D:\7 semestr\Metaheurystyki\Data\ttp_student";
-        private const string PathToTestData = @"D:\7 semestr\Metaheurystyki\Data\ttp_student\trivial_0.ttp";
-
         #endregion Private parameters
 
-        private int GetIntFromLine(string line, int indexAtSplitedLine)
+        public async Task<DataContainer> GetCreatedDataContainerFromFileAsync(string filePath = PathToTestData)
         {
-            var splitedLine = line.Split("\t");
+            var allLines = await ReadAllLinesAsync(filePath);
 
-            return Int32.Parse(splitedLine[indexAtSplitedLine]);
+            return CreateDataContainer(allLines);
         }
 
-        private double GetDoubleFromLine(string line, int indexAtSplitedLine)
+        private async Task<string[]> ReadAllLinesAsync(string filePath = PathToTestData)
         {
-            var splitedLine = line.Split("\t");
-
-            return Double.Parse(splitedLine[indexAtSplitedLine]);
+            var fileContent = await File.ReadAllLinesAsync(filePath);
+            return fileContent;
         }
 
-        private List<Place> CreatePlaces(string[] allLinesFromFile, int firstPlaceIndex, int numberOfPlaces)
+        private DataContainer CreateDataContainer(string[] allLinesFromFile)
         {
-            List<Place> places = new List<Place>();
-            var counter = numberOfPlaces + firstPlaceIndex;
-            for (int i = firstPlaceIndex; i < counter; i++)
+            DataContainer dataContainer = new DataContainer
             {
-                var line = allLinesFromFile.ElementAt(i);
+                Dimension = GetIntFromLine(allLinesFromFile.ElementAt(DataLoader.DimensionIndex), ValueIndex),
+                NumberOfItems = GetIntFromLine(allLinesFromFile.ElementAt(DataLoader.NumberOfItemsIndex), ValueIndex),
+                CapacityOfKnapsack = GetIntFromLine(allLinesFromFile.ElementAt(DataLoader.CapacityOfKnapsackIndex), ValueIndex),
 
-                var placeId = GetIntFromLine(line, PlaceIdIndex);
-                var placePozitionX = GetDoubleFromLine(line, PozitionXIndex);
-                var placePozitionY = GetDoubleFromLine(line, PozitionYIndex);
+                MinSpeed = GetDoubleFromLine(allLinesFromFile.ElementAt(DataLoader.MinSpeedIndex), ValueIndex),
+                MaxSpeed = GetDoubleFromLine(allLinesFromFile.ElementAt(DataLoader.MaxSpeedIndex), ValueIndex),
+                RentingRatio = GetDoubleFromLine(allLinesFromFile.ElementAt(DataLoader.RentingRatioIndex), ValueIndex),
+            };
 
-                #region id decreasing by 1 because at input file it id starts by index = 1. For this implementation necessary to start index by 0.
+            var places = CreatePlaces(allLinesFromFile, PlacesStartIndex, dataContainer.Dimension);
+            NumberOfPlaces = dataContainer.Dimension;
 
-                placeId--;
+            var items = CreateItems(allLinesFromFile, ItemsStartIndex, dataContainer.NumberOfItems);
 
-                #endregion id decreasing by 1 because at input file it id starts by index = 1. For this implementation necessary to start index by 0.
+            dataContainer.Places = places;
+            dataContainer.Items = items;
+            dataContainer.DistanseMatrix = CreateDimensionMatrix(places);
+            dataContainer.ItemsVector = CreateItemsVector(items);
 
-                Place tmpPlace = new Place()
+            return dataContainer;
+        }
+
+        private double[,] CreateDimensionMatrix(List<Place> places)
+        {
+            int placesCount = places.Count;
+            double[,] dimensionMatrix = new double[placesCount, placesCount];
+
+            for (int i = 0; i < placesCount; i++)
+            {
+                for (int j = 0; j < placesCount; j++)
                 {
-                    Id = placeId,
-                    PozitionX = placePozitionX,
-                    PozitionY = placePozitionY
-                };
-
-                places.Add(tmpPlace);
+                    dimensionMatrix[i, j] = EuclideanDistance.FindEuclideanDistance(places.ElementAt(i), places.ElementAt(j));
+                }
             }
 
-            return places;
+            return dimensionMatrix;
         }
 
         private List<Item> CreateItems(string[] allLinesFromFile, int firstItemIndex, int numberOfItems)
@@ -129,32 +150,6 @@ namespace Loader
             return items;
         }
 
-        public DataContainer CreateDataContainer(string[] allLinesFromFile)
-        {
-            DataContainer DataContainer = new DataContainer
-            {
-                Dimension = GetIntFromLine(allLinesFromFile.ElementAt(DataLoader.DimensionIndex), ValueIndex),
-                NumberOfItems = GetIntFromLine(allLinesFromFile.ElementAt(DataLoader.NumberOfItemsIndex), ValueIndex),
-                CapacityOfKnapsack = GetIntFromLine(allLinesFromFile.ElementAt(DataLoader.CapacityOfKnapsackIndex), ValueIndex),
-
-                MinSpeed = GetDoubleFromLine(allLinesFromFile.ElementAt(DataLoader.MinSpeedIndex), ValueIndex),
-                MaxSpeed = GetDoubleFromLine(allLinesFromFile.ElementAt(DataLoader.MaxSpeedIndex), ValueIndex),
-                RentingRatio = GetDoubleFromLine(allLinesFromFile.ElementAt(DataLoader.RentingRatioIndex), ValueIndex),
-            };
-
-            var places = CreatePlaces(allLinesFromFile, PlacesStartIndex, DataContainer.Dimension);
-            NumberOfPlaces = DataContainer.Dimension;
-
-            var items = CreateItems(allLinesFromFile, ItemsStartIndex, DataContainer.NumberOfItems);
-
-            DataContainer.Places = places;
-            DataContainer.Items = items;
-            DataContainer.DistanseMatrix = CreateDimenstionMatrix(places);
-            DataContainer.ItemsVector = CreateItemsVector(items);
-
-            return DataContainer;
-        }
-
         private double[] CreateItemsVector(List<Item> items)
         {
             int itemsCount = items.Count;
@@ -168,33 +163,49 @@ namespace Loader
             return itemsVector;
         }
 
-        private double[,] CreateDimenstionMatrix(List<Place> places)
+        private List<Place> CreatePlaces(string[] allLinesFromFile, int firstPlaceIndex, int numberOfPlaces)
         {
-            int placesCount = places.Count;
-            double[,] dimenstionMatrix = new double[placesCount, placesCount];
-
-            for (int i = 0; i < placesCount; i++)
+            List<Place> places = new List<Place>();
+            var counter = numberOfPlaces + firstPlaceIndex;
+            for (int i = firstPlaceIndex; i < counter; i++)
             {
-                for (int j = 0; j < placesCount; j++)
+                var line = allLinesFromFile.ElementAt(i);
+
+                var placeId = GetIntFromLine(line, PlaceIdIndex);
+                var placePozitionX = GetDoubleFromLine(line, PositionXIndex);
+                var placePozitionY = GetDoubleFromLine(line, PositionYIndex);
+
+                #region id decreasing by 1 because at input file it id starts by index = 1. For this implementation necessary to start index by 0.
+
+                placeId--;
+
+                #endregion id decreasing by 1 because at input file it id starts by index = 1. For this implementation necessary to start index by 0.
+
+                Place tmpPlace = new Place()
                 {
-                    dimenstionMatrix[i, j] = EuclideanDistance.FindEuclideanDistance(places.ElementAt(i), places.ElementAt(j));
-                }
+                    Id = placeId,
+                    PozitionX = placePozitionX,
+                    PozitionY = placePozitionY
+                };
+
+                places.Add(tmpPlace);
             }
 
-            return dimenstionMatrix;
+            return places;
         }
 
-        public async Task<string[]> ReadAllLinesAsync(string filePath = PathToTestData)
+        private double GetDoubleFromLine(string line, int indexAtSplitedLine)
         {
-            var fileContent = await File.ReadAllLinesAsync(filePath);
-            return fileContent;
+            var splitedLine = line.Split("\t");
+
+            return Double.Parse(splitedLine[indexAtSplitedLine]);
         }
 
-        public async Task<DataContainer> GetDataFromFileAsync()
+        private int GetIntFromLine(string line, int indexAtSplitedLine)
         {
-            var allLines = await ReadAllLinesAsync();
+            var splitedLine = line.Split("\t");
 
-            return CreateDataContainer(allLines);
+            return Int32.Parse(splitedLine[indexAtSplitedLine]);
         }
     }
 }
