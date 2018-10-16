@@ -72,11 +72,21 @@ namespace Loader
             {
                 var line = allLinesFromFile.ElementAt(i);
 
+                var placeId = GetIntFromLine(line, PlaceIdIndex);
+                var placePozitionX = GetDoubleFromLine(line, PozitionXIndex);
+                var placePozitionY = GetDoubleFromLine(line, PozitionYIndex);
+
+                #region id decreasing by 1 because at input file it id starts by index = 1. For this implementation necessary to start index by 0.
+
+                placeId--;
+
+                #endregion id decreasing by 1 because at input file it id starts by index = 1. For this implementation necessary to start index by 0.
+
                 Place tmpPlace = new Place()
                 {
-                    Id = GetIntFromLine(line, PlaceIdIndex),
-                    PozitionX = GetDoubleFromLine(line, PozitionXIndex),
-                    PozitionY = GetDoubleFromLine(line, PozitionYIndex)
+                    Id = placeId,
+                    PozitionX = placePozitionX,
+                    PozitionY = placePozitionY
                 };
 
                 places.Add(tmpPlace);
@@ -92,10 +102,18 @@ namespace Loader
             for (int i = firstItemIndex; i < counter; i++)
             {
                 var line = allLinesFromFile.ElementAt(i);
+
                 var itemId = GetIntFromLine(line, ItemIdIndex);
                 var itemWeight = GetIntFromLine(line, WeightIndex);
                 var itemProfit = GetIntFromLine(line, ProfitXIndex);
                 var itemPlaceId = GetIntFromLine(line, ItemPlaceIdIndex);
+
+                #region id decreasing by 1 because at input file it id starts by index = 1. For this implementation necessary to start index by 0.
+
+                itemId--;
+                itemPlaceId--;
+
+                #endregion id decreasing by 1 because at input file it id starts by index = 1. For this implementation necessary to start index by 0.
 
                 Item tmpItem = new Item()
                 {
