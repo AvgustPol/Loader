@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Loader
 {
-    public class FileLoader
+    public class DataLoader
     {
         #region Private parameters
 
@@ -129,17 +129,17 @@ namespace Loader
             return items;
         }
 
-        private DataContainer CreateDataContainer(string[] allLinesFromFile)
+        public DataContainer CreateDataContainer(string[] allLinesFromFile)
         {
             DataContainer DataContainer = new DataContainer
             {
-                Dimension = GetIntFromLine(allLinesFromFile.ElementAt(FileLoader.DimensionIndex), ValueIndex),
-                NumberOfItems = GetIntFromLine(allLinesFromFile.ElementAt(FileLoader.NumberOfItemsIndex), ValueIndex),
-                CapacityOfKnapsack = GetIntFromLine(allLinesFromFile.ElementAt(FileLoader.CapacityOfKnapsackIndex), ValueIndex),
+                Dimension = GetIntFromLine(allLinesFromFile.ElementAt(DataLoader.DimensionIndex), ValueIndex),
+                NumberOfItems = GetIntFromLine(allLinesFromFile.ElementAt(DataLoader.NumberOfItemsIndex), ValueIndex),
+                CapacityOfKnapsack = GetIntFromLine(allLinesFromFile.ElementAt(DataLoader.CapacityOfKnapsackIndex), ValueIndex),
 
-                MinSpeed = GetDoubleFromLine(allLinesFromFile.ElementAt(FileLoader.MinSpeedIndex), ValueIndex),
-                MaxSpeed = GetDoubleFromLine(allLinesFromFile.ElementAt(FileLoader.MaxSpeedIndex), ValueIndex),
-                RentingRatio = GetDoubleFromLine(allLinesFromFile.ElementAt(FileLoader.RentingRatioIndex), ValueIndex),
+                MinSpeed = GetDoubleFromLine(allLinesFromFile.ElementAt(DataLoader.MinSpeedIndex), ValueIndex),
+                MaxSpeed = GetDoubleFromLine(allLinesFromFile.ElementAt(DataLoader.MaxSpeedIndex), ValueIndex),
+                RentingRatio = GetDoubleFromLine(allLinesFromFile.ElementAt(DataLoader.RentingRatioIndex), ValueIndex),
             };
 
             var places = CreatePlaces(allLinesFromFile, PlacesStartIndex, DataContainer.Dimension);
