@@ -78,13 +78,13 @@ namespace Loader
         {
             DataContainer dataContainer = new DataContainer
             {
-                Dimension = GetIntFromLine(allLinesFromFile.ElementAt(DataLoader.DimensionIndex), ValueIndex),
-                NumberOfItems = GetIntFromLine(allLinesFromFile.ElementAt(DataLoader.NumberOfItemsIndex), ValueIndex),
-                CapacityOfKnapsack = GetIntFromLine(allLinesFromFile.ElementAt(DataLoader.CapacityOfKnapsackIndex), ValueIndex),
+                Dimension = GetIntFromLine(allLinesFromFile.ElementAt(DimensionIndex), ValueIndex),
+                NumberOfItems = GetIntFromLine(allLinesFromFile.ElementAt(NumberOfItemsIndex), ValueIndex),
+                CapacityOfKnapsack = GetIntFromLine(allLinesFromFile.ElementAt(CapacityOfKnapsackIndex), ValueIndex),
 
-                MinSpeed = GetDoubleFromLine(allLinesFromFile.ElementAt(DataLoader.MinSpeedIndex), ValueIndex),
-                MaxSpeed = GetDoubleFromLine(allLinesFromFile.ElementAt(DataLoader.MaxSpeedIndex), ValueIndex),
-                RentingRatio = GetDoubleFromLine(allLinesFromFile.ElementAt(DataLoader.RentingRatioIndex), ValueIndex),
+                MinSpeed = GetDoubleFromLine(allLinesFromFile.ElementAt(MinSpeedIndex), ValueIndex),
+                MaxSpeed = GetDoubleFromLine(allLinesFromFile.ElementAt(MaxSpeedIndex), ValueIndex),
+                RentingRatio = GetDoubleFromLine(allLinesFromFile.ElementAt(RentingRatioIndex), ValueIndex),
             };
 
             var places = CreatePlaces(allLinesFromFile, PlacesStartIndex, dataContainer.Dimension);
