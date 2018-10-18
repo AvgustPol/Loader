@@ -23,9 +23,8 @@ namespace Loader
 
         private const int NumberOfItemsIndex = 3;
 
-        private const string PathToFolderWithData = @"D:\7 semestr\Metaheurystyki\Data\ttp_student";
-
-        private const string PathToTestData = @"D:\7 semestr\Metaheurystyki\Data\ttp_student\trivial_0.ttp";
+        //private const string PathToTestData = @"D:\7 semestr\Metaheurystyki\Data\ttp_student\trivial_0.ttp";
+        private const string PathToTestData = @"D:\7 semestr\Metaheurystyki\Data\ttp_student\easy_0.ttp";
 
         private const int PlacesStartIndex = 10;
 
