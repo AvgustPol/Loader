@@ -94,26 +94,26 @@ namespace Loader
 
             dataContainer.Places = places;
             dataContainer.Items = items;
-            dataContainer.DistanseMatrix = CreateDimensionMatrix(places);
+            dataContainer.DistanceMatrix = CreateDistanceMatrix(places);
             dataContainer.ItemsVector = CreateItemsVector(items);
 
             return dataContainer;
         }
 
-        private double[,] CreateDimensionMatrix(List<Place> places)
+        private double[,] CreateDistanceMatrix(List<Place> places)
         {
             int placesCount = places.Count;
-            double[,] dimensionMatrix = new double[placesCount, placesCount];
+            double[,] distanceMatrix = new double[placesCount, placesCount];
 
             for (int i = 0; i < placesCount; i++)
             {
                 for (int j = 0; j < placesCount; j++)
                 {
-                    dimensionMatrix[i, j] = EuclideanDistance.FindEuclideanDistance(places.ElementAt(i), places.ElementAt(j));
+                    distanceMatrix[i, j] = EuclideanDistance.FindEuclideanDistance(places.ElementAt(i), places.ElementAt(j));
                 }
             }
 
-            return dimensionMatrix;
+            return distanceMatrix;
         }
 
         private List<Item> CreateItems(string[] allLinesFromFile, int firstItemIndex, int numberOfItems)
