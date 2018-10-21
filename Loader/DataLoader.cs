@@ -23,8 +23,8 @@ namespace Loader
 
         private const int NumberOfItemsIndex = 3;
 
-        //private const string PathToTestData = @"D:\7 semestr\Metaheurystyki\Data\ttp_student\trivial_0.ttp";
-        private const string PathToTestData = @"D:\7 semestr\Metaheurystyki\Data\ttp_student\easy_0.ttp";
+        private const string PathToTestData = @"D:\7 semestr\Metaheurystyki\Data\ttp_student\trivial_0.ttp";
+        //private const string PathToTestData = @"D:\7 semestr\Metaheurystyki\Data\ttp_student\easy_0.ttp";
 
         private const int PlacesStartIndex = 10;
 
@@ -95,6 +95,7 @@ namespace Loader
             dataContainer.Items = items;
             dataContainer.DistanceMatrix = CreateDistanceMatrix(places);
             dataContainer.ItemsVector = CreateItemsVector(items);
+            //dataContainer.ItemsMatrix = CreateItemsMatrix(items);
 
             return dataContainer;
         }
