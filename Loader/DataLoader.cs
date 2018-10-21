@@ -24,7 +24,6 @@ namespace Loader
         private const int NumberOfItemsIndex = 3;
 
         private const string PathToTestData = @"D:\7 semestr\Metaheurystyki\Data\ttp_student\trivial_0.ttp";
-        //private const string PathToTestData = @"D:\7 semestr\Metaheurystyki\Data\ttp_student\easy_0.ttp";
 
         private const int PlacesStartIndex = 10;
 
@@ -95,6 +94,7 @@ namespace Loader
             dataContainer.Items = items;
             dataContainer.DistanceMatrix = CreateDistanceMatrix(places);
             dataContainer.ItemsVector = CreateItemsVector(items);
+            //TODO: finish
             //dataContainer.ItemsMatrix = CreateItemsMatrix(items);
 
             return dataContainer;
@@ -172,8 +172,8 @@ namespace Loader
                 var line = allLinesFromFile.ElementAt(i);
 
                 var placeId = GetIntFromLine(line, PlaceIdIndex);
-                var placePozitionX = GetDoubleFromLine(line, PositionXIndex);
-                var placePozitionY = GetDoubleFromLine(line, PositionYIndex);
+                var placePositionX = GetDoubleFromLine(line, PositionXIndex);
+                var placePositionY = GetDoubleFromLine(line, PositionYIndex);
 
                 #region id decreasing by 1 because at input file it id starts by index = 1. For this implementation necessary to start index by 0.
 
@@ -184,8 +184,8 @@ namespace Loader
                 Place tmpPlace = new Place()
                 {
                     Id = placeId,
-                    PozitionX = placePozitionX,
-                    PozitionY = placePozitionY
+                    PozitionX = placePositionX,
+                    PozitionY = placePositionY
                 };
 
                 places.Add(tmpPlace);
