@@ -23,10 +23,6 @@ namespace Loader
 
         private const int NumberOfItemsIndex = 3;
 
-        private const string PathToTestData = @"D:\7 semestr\Metaheurystyki\Data\ttp_student\trivial_0.ttp";
-        //private const string PathToTestData = @"D:\7 semestr\Metaheurystyki\Data\ttp_student\easy_0.ttp";
-        //private const string PathToTestData = @"D:\7 semestr\Metaheurystyki\Data\ttp_student\hard_4.ttp";
-
         private const int PlacesStartIndex = 10;
 
         private const int RentingRatioIndex = 7;
@@ -61,14 +57,14 @@ namespace Loader
 
         #endregion Private parameters
 
-        public async Task<DataContainer> GetCreatedDataContainerFromFileAsync(string filePath = PathToTestData)
+        public async Task<DataContainer> GetCreatedDataContainerFromFileAsync(string filePath)
         {
             var allLines = await ReadAllLinesAsync(filePath);
 
             return CreateDataContainer(allLines);
         }
 
-        private async Task<string[]> ReadAllLinesAsync(string filePath = PathToTestData)
+        private async Task<string[]> ReadAllLinesAsync(string filePath)
         {
             var fileContent = await File.ReadAllLinesAsync(filePath);
             return fileContent;

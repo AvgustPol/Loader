@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\DataModel\DataModel\DataModel.csproj" />
+    <ProjectReference Include="..\..\DataModel\DataModel\GlobalData.csproj" />
   </ItemGroup>
 
 </Project>

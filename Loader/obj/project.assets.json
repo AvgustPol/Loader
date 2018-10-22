@@ -208,14 +208,14 @@
           "build/netstandard2.0/NETStandard.Library.targets": {}
         }
       },
-      "DataModel/1.0.0": {
+      "GlobalData/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.1",
         "compile": {
-          "bin/placeholder/DataModel.dll": {}
+          "bin/placeholder/GlobalData.dll": {}
         },
         "runtime": {
-          "bin/placeholder/DataModel.dll": {}
+          "bin/placeholder/GlobalData.dll": {}
         }
       }
     }
@@ -684,15 +684,15 @@
         "netstandard.library.nuspec"
       ]
     },
-    "DataModel/1.0.0": {
+    "GlobalData/1.0.0": {
       "type": "project",
-      "path": "../../DataModel/DataModel/DataModel.csproj",
-      "msbuildProject": "../../DataModel/DataModel/DataModel.csproj"
+      "path": "../../DataModel/DataModel/GlobalData.csproj",
+      "msbuildProject": "../../DataModel/DataModel/GlobalData.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.1": [
-      "DataModel >= 1.0.0",
+      "GlobalData >= 1.0.0",
       "Microsoft.NETCore.App >= 2.1.0"
     ]
   },
@@ -726,8 +726,8 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "D:\\7 semestr\\Metaheurystyki\\Implementation\\DataModel\\DataModel\\DataModel.csproj": {
-              "projectPath": "D:\\7 semestr\\Metaheurystyki\\Implementation\\DataModel\\DataModel\\DataModel.csproj"
+            "D:\\7 semestr\\Metaheurystyki\\Implementation\\DataModel\\DataModel\\GlobalData.csproj": {
+              "projectPath": "D:\\7 semestr\\Metaheurystyki\\Implementation\\DataModel\\DataModel\\GlobalData.csproj"
             }
           }
         }
