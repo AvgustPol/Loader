@@ -84,16 +84,12 @@ namespace Loader
             };
 
             var places = CreatePlaces(allLinesFromFile, PlacesStartIndex, dataContainer.Dimension);
-            NumberOfPlaces = dataContainer.Dimension;
 
             var items = CreateItems(allLinesFromFile, ItemsStartIndex, dataContainer.NumberOfItems);
 
             dataContainer.Places = places;
-            dataContainer.Items = items;
             dataContainer.DistanceMatrix = CreateDistanceMatrix(places);
-            dataContainer.ItemsVector = CreateItemsVector(items);
-            //TODO: finish
-            //dataContainer.ItemsMatrix = CreateItemsMatrix(items);
+            dataContainer.Items = items;
 
             return dataContainer;
         }
@@ -114,9 +110,9 @@ namespace Loader
             return distanceMatrix;
         }
 
-        private List<Item> CreateItems(string[] allLinesFromFile, int firstItemIndex, int numberOfItems)
+        private Dictionary<int, Item> CreateItems(string[] allLinesFromFile, int firstItemIndex, int numberOfItems)
         {
-            List<Item> items = new List<Item>();
+            Dictionary<int, Item> items = new Dictionary<int, Item>(numberOfItems);
             var counter = numberOfItems + firstItemIndex;
             for (int i = firstItemIndex; i < counter; i++)
             {
@@ -134,7 +130,7 @@ namespace Loader
 
                 #endregion id decreasing by 1 because at input file it id starts by index = 1. For this implementation necessary to start index by 0.
 
-                Item tmpItem = new Item()
+                Item item = new Item()
                 {
                     Id = itemId,
                     Weight = itemWeight,
@@ -142,23 +138,10 @@ namespace Loader
                     PlaceId = itemPlaceId
                 };
 
-                items.Add(tmpItem);
+                items.Add(itemId, item);
             }
 
             return items;
-        }
-
-        private double[] CreateItemsVector(List<Item> items)
-        {
-            int itemsCount = items.Count;
-            double[] itemsVector = new double[itemsCount];
-
-            for (int i = 0; i < itemsCount; i++)
-            {
-                itemsVector[i] = items.ElementAt(i).PlaceId;
-            }
-
-            return itemsVector;
         }
 
         private List<Place> CreatePlaces(string[] allLinesFromFile, int firstPlaceIndex, int numberOfPlaces)
