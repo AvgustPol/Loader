@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Loader
 {
@@ -64,18 +63,18 @@ namespace Loader
             return CreateDataContainer(allLines);
         }
 
-        public async Task<DataContainer> GetCreatedDataContainerFromFileAsync(string filePath)
-        {
-            var allLines = await ReadAllLinesAsync(filePath);
+        //public async Task<DataContainer> GetCreatedDataContainerFromFileAsync(string filePath)
+        //{
+        //    var allLines = await ReadAllLinesAsync(filePath);
 
-            return CreateDataContainer(allLines);
-        }
+        //    return CreateDataContainer(allLines);
+        //}
 
-        private async Task<string[]> ReadAllLinesAsync(string filePath)
-        {
-            var fileContent = await File.ReadAllLinesAsync(filePath);
-            return fileContent;
-        }
+        //private async Task<string[]> ReadAllLinesAsync(string filePath)
+        //{
+        //    var fileContent = await File.ReadAllLinesAsync(filePath);
+        //    return fileContent;
+        //}
 
         private DataContainer CreateDataContainer(string[] allLinesFromFile)
         {
