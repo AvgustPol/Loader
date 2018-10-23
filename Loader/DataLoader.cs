@@ -57,6 +57,13 @@ namespace Loader
 
         #endregion Private parameters
 
+        public DataContainer GetCreatedDataContainerFromFile(string filePath)
+        {
+            var allLines = File.ReadAllLines(filePath);
+
+            return CreateDataContainer(allLines);
+        }
+
         public async Task<DataContainer> GetCreatedDataContainerFromFileAsync(string filePath)
         {
             var allLines = await ReadAllLinesAsync(filePath);
@@ -76,7 +83,7 @@ namespace Loader
             {
                 Dimension = GetIntFromLine(allLinesFromFile.ElementAt(DimensionIndex), ValueIndex),
                 NumberOfItems = GetIntFromLine(allLinesFromFile.ElementAt(NumberOfItemsIndex), ValueIndex),
-                CapacityOfKnapsack = GetIntFromLine(allLinesFromFile.ElementAt(CapacityOfKnapsackIndex), ValueIndex),
+                MaxCapacityOfKnapsack = GetIntFromLine(allLinesFromFile.ElementAt(CapacityOfKnapsackIndex), ValueIndex),
 
                 MinSpeed = GetDoubleFromLine(allLinesFromFile.ElementAt(MinSpeedIndex), ValueIndex),
                 MaxSpeed = GetDoubleFromLine(allLinesFromFile.ElementAt(MaxSpeedIndex), ValueIndex),
