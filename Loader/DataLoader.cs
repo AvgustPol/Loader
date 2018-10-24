@@ -38,19 +38,18 @@ namespace Loader
 
         #region Item
 
-        public const int ItemPlaceIdIndex = 3;
         private const int ItemIdIndex = 0;
-        private const int PositionXIndex = 1;
-        private const int PositionYIndex = 2;
+        public const int ItemProfitIndex = 1;
+        public const int ItemWeightIndex = 2;
+        public const int ItemLocationIndex = 3;
 
         #endregion Item
 
         #region Place
 
-        public const int ItemIdIndexForPlace = 3;
         public const int PlaceIdIndex = 0;
-        public const int ProfitXIndex = 2;
-        public const int WeightIndex = 1;
+        private const int PlacePositionXIndex = 1;
+        private const int PlacePositionYIndex = 2;
 
         #endregion Place
 
@@ -125,9 +124,9 @@ namespace Loader
                 var line = allLinesFromFile.ElementAt(i);
 
                 var itemId = GetIntFromLine(line, ItemIdIndex);
-                var itemWeight = GetIntFromLine(line, WeightIndex);
-                var itemProfit = GetIntFromLine(line, ProfitXIndex);
-                var itemPlaceId = GetIntFromLine(line, ItemPlaceIdIndex);
+                var itemProfit = GetIntFromLine(line, ItemProfitIndex);
+                var itemWeight = GetIntFromLine(line, ItemWeightIndex);
+                var itemPlaceId = GetIntFromLine(line, ItemLocationIndex);
 
                 #region id decreasing by 1 because at input file it id starts by index = 1. For this implementation necessary to start index by 0.
 
@@ -159,8 +158,8 @@ namespace Loader
                 var line = allLinesFromFile.ElementAt(i);
 
                 var placeId = GetIntFromLine(line, PlaceIdIndex);
-                var placePositionX = GetDoubleFromLine(line, PositionXIndex);
-                var placePositionY = GetDoubleFromLine(line, PositionYIndex);
+                var placePositionX = GetDoubleFromLine(line, PlacePositionXIndex);
+                var placePositionY = GetDoubleFromLine(line, PlacePositionYIndex);
 
                 #region id decreasing by 1 because at input file it id starts by index = 1. For this implementation necessary to start index by 0.
 
@@ -178,6 +177,7 @@ namespace Loader
                 places.Add(tmpPlace);
             }
 
+            NumberOfPlaces = places.Count;
             return places;
         }
 
